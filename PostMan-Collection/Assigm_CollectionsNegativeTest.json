@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "5f61d776-a9e8-483c-be31-b11444e7e42d",
+		"name": "Assigment2_BACKEND-POSTMAN-NEWMAN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Negative Scenarios",
+			"item": [
+				{
+					"name": "1-Get all actives tasks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"    pm.test(\"2- This test is to confirm if Content-Type is present\", function () {\r",
+									"            pm.response.to.have.header(\"Content-0Type\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"3- Status code name has string content\", function () {\r",
+									"        pm.response.to.have.status(\"Correct\");\r",
+									"        });\r",
+									"\r",
+									"    pm.test(\"4- Response time is less than average, COOL!\", function () {\r",
+									"        pm.expect(pm.response.responseTime).to.be.eql(150);\r",
+									"    });\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basicURL}}",
+							"host": [
+								"{{basicURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2-Create new task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" \r",
+									"\r",
+									"    pm.test(\"This is the correct name for your Task\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.content).to.contain(\"254\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Status code name has string content\", function () {\r",
+									"    pm.response.to.have.status(\"content\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Response time QUICK! less that the average.\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.greaterThan(-1).and.below(-10);\r",
+									"    });\r",
+									"\r",
+									" \r",
+									"    \r",
+									"    var id = pm.environment.get(\"projectID\");\r",
+									"    pm.test(\"8- To verify if the project ID field is not NULL\",function(){\r",
+									"    var jsonData = pm.response.json()\r",
+									"    pm.expect(jsonData.project_id).to.be.null;\r",
+									"    });\r",
+									"\r",
+									"    //Setting the Environment Variable to the id of the new task.\r",
+									"    \r",
+									"    var jsonData = pm.response.json()\r",
+									"    pm.environment.set(\"taskID\",jsonData.id);\r",
+									"    \r",
+									"\r",
+									"    \r",
+									"\r",
+									"    \r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-t",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-Id",
+								"value": "$(uuidgen)",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Study for the Certification Exam\",\r\n    \"due_string\": \"monday at 16:35\",\r\n    \"due_lang\": \"en\",\r\n    \"priority\": 0,\r\n    \"project_id\": {{projectID}}\r\n}\r\n/* I need to send on priority field a 0, because is the only way todoist take it as a 4 priority */",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basicURL}}",
+							"host": [
+								"{{basicURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3-Get an active task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"    pm.test(\"The Task ID is correct this opportunity\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(jsonData.content);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Response time QUICK! less that the average.\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.greaterThan(0).and.below(-1000);\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"    pm.test(\"7- Ensures that the Connection is OK\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Connection')).to.eql('keep-dead');\r",
+									"    });\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basicURL}}/{{taskID}}",
+							"host": [
+								"{{basicURL}}"
+							],
+							"path": [
+								"{{taskID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4-Update a task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"        \r",
+									"    pm.test(\"\\Status code name has string content\", function () {\r",
+									"    pm.response.to.have.status(\"Successful\");\r",
+									"    });\r",
+									"\r",
+									"    \r",
+									"  \r",
+									"\r",
+									"       \r",
+									"   "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-t",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Requested-Id",
+								"value": "$(uuidgen)",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"To Pass the Certification Exam\", \r\n    \"due_string\": \"monday at 17:35\", \r\n    \"due_lang\": \"en\", \r\n    \"priority\": 0,\r\n    \"project_id\": {{projectID}}\r\n}\r\n\r\n/*I need to send on priority field a 0, because is the only way todoist take it as a 4 priority*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basicURL}}/{{taskID}}",
+							"host": [
+								"{{basicURL}}"
+							],
+							"path": [
+								"{{taskID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5-Changing status to \"Complete\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"    pm.test(\"2-The response must be valid and contains a body\", function () {      \r",
+									"        pm.response.to.be.footer;\r",
+									"        pm.response.to.have.contain;\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"        pm.test(\"Status code name has string\", function () {\r",
+									"        pm.response.to.have.status(\"various\");\r",
+									"    });\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{basicURL}}/{{taskID}}/close",
+							"host": [
+								"{{basicURL}}"
+							],
+							"path": [
+								"{{taskID}}",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6-Reopen a Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"    \r",
+									"   \r",
+									"    pm.test(\"2- Successful POST request\", function () {\r",
+									"        pm.expect(pm.response.code).to.be.oneOf([300]);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"3- Status code name has string\", function () {\r",
+									"        pm.response.to.have.status(\"Dominican Republic\");\r",
+									"    });\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{basicURL}}/{{taskID}}/reopen",
+							"host": [
+								"{{basicURL}}"
+							],
+							"path": [
+								"{{taskID}}",
+								"reopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7-Delete a task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"    pm.test(\"2- Successful POST request\", function () {\r",
+									"        pm.expect(pm.response.code).to.be.oneOf([ABC]);\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"    pm.test(\"4- Ensures that the Connection is OK\", () => {\r",
+									"        pm.expect(pm.response.headers.get('Connection')).to.eql(\"*\");\r",
+									"    });\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{basicURL}}/{{taskID}}",
+							"host": [
+								"{{basicURL}}"
+							],
+							"path": [
+								"{{taskID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"1- Status code is Succesful\", function () {",
+					"        pm.response.to.be.success;",
+					"    });",
+					""
+				]
+			}
+		}
+	]
+}
