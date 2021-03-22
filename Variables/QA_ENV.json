@@ -1,0 +1,34 @@
+{
+	"id": "f65adf9e-1478-451d-96cb-3ae7e694dda2",
+	"name": "Quality Assurance",
+	"values": [
+		{
+			"key": "basicURL",
+			"value": "https://api.todoist.com/rest/v1/tasks",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "c789c7faf728b94c97ebbece27abebe4b5e2b385",
+			"enabled": true
+		},
+		{
+			"key": "projectName",
+			"value": "Assigment2_BACKEND-POSTMAN-NEWMAN",
+			"enabled": true
+		},
+		{
+			"key": "projectID",
+			"value": "2261220983",
+			"enabled": true
+		},
+		{
+			"key": "taskID",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-03-22T19:04:19.498Z",
+	"_postman_exported_using": "Postman/8.0.8-210322-0540"
+}
